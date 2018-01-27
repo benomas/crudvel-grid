@@ -1,0 +1,23 @@
+{
+  "name": "crudvel-grid",
+  "version": "1.0.0",
+  "description": "Grid for interact with laravel crudvel api",
+  "main": "crudvel-grid.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benomas/crudvel-grid.git"
+  },
+  "keywords": [
+    "crudvel",
+    "grid"
+  ],
+  "author": "Benomas <benomas@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benomas/crudvel-grid/issues"
+  },
+  "homepage": "https://github.com/benomas/crudvel-grid#readme"
+}
