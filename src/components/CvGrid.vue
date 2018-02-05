@@ -63,6 +63,8 @@ export default {
           generalSearch:"",
         },
       },
+      cvThs:null,
+      cvTds:null,
       cvTableChildren:null,
       cvHeadTrChildren:null,
       cvBodyTrs:null,
@@ -169,26 +171,70 @@ export default {
       console.log("configurations error for cv-grid component");
       return false;
     },
-    processSlots:function(){
-      
-      if(
-        !this.$slots["cv-grid-data"] || 
-        !(this.cvTableChildren = this.getSlotChildren(this.$slots["cv-grid-data"][0])) ||
-        typeof this.cvTableChildren[0]==="undefined" ||
-        typeof this.cvTableChildren[0].componentInstance==="undefined" ||
-        typeof this.cvTableChildren[0].componentInstance.$slots==="undefined" ||
-        typeof this.cvTableChildren[0].componentInstance.$slots["cv-ths-slot"]==="undefined"
-      )
-        return this.showConfigErrorMessage();
-
-      this.cvHeadTrChildren = this.findConfig(this.cvTableChildren[0].componentInstance.$slots["cv-ths-slot"][0]);
-      if(!this.cvHeadTrChildren)
+    findComponentChild:function(currentNode,component){
+      if(!currentNode)
         return false;
 
+      if( 
+          typeof currentNode.children ==="undefined" && 
+          typeof currentNode.componentInstance ==="undefined"
+        )
+        return false;
+
+      if(currentNode.componentInstance && currentNode.componentOptions.tag===component)
+        return currentNode;
+
+      let componentFound = false;
+      for(let i=0; i<currentNode["children"].length; i++){
+        if(currentNode["children"][i]["tag"])
+          componentFound = this.findComponentChild(currentNode["children"][i],component);
+        if(componentFound)
+          return componentFound;
+      }
+      return false;
+    },
+    findSlotChild:function(currentNode,slot){
+      if(!currentNode)
+        return false;
+
+      if( typeof currentNode.children ==="undefined" && 
+          ( typeof currentNode.componentInstance ==="undefined" || 
+            typeof currentNode.componentInstance.$slots ==="undefined" ||
+            typeof currentNode.componentInstance.$slots[slot] ==="undefined"
+          )
+        )
+        return false;
+      if(currentNode.componentInstance)
+        return currentNode.componentInstance.$slots[slot];
+
+      let slotFound = false;
+      for(let i=0; i<currentNode["children"].length; i++){
+        if(currentNode["children"][i]["tag"])
+          slotFound = this.findSlotChild(currentNode["children"][i],slot);
+        if(slotFound)
+          return slotFound;
+      }
+      return false;
+    },
+    processSlots:function(){
+      if(
+        !this.$slots["cv-grid-data"] || 
+        !(this.cvThs = this.findComponentChild(this.$slots["cv-grid-data"][0],"cv-ths"))
+      )
+        return this.showConfigErrorMessage();
+      var cvThsSlot;
+      if(!(cvThsSlot = this.findSlotChild(this.cvThs,"cv-ths-slot")))
+        return this.showConfigErrorMessage();
+
+      this.cvHeadTrChildren = this.findConfig(cvThsSlot[0]);
+      if(!this.cvHeadTrChildren)
+        return false;
       for(let i=0; i<this.cvHeadTrChildren.length; i++){
         let cvTh =  this.cvHeadTrChildren[i];
-        let attrs =  cvTh.data.attrs || null;
-        if( attrs && attrs["cv-key"]){
+        if(typeof cvTh.data==="undefined" || typeof cvTh.data.attrs==="undefined")
+          continue;
+        let attrs =  cvTh.data.attrs;
+        if(attrs["cv-key"]){
           if(this.hasClass(cvTh,"cv-selectable")!==false)
             this.params.paginate.selectQuery.push(attrs["cv-key"]);
           if(this.hasClass(cvTh,"cv-filterable")!==false)
@@ -221,6 +267,7 @@ export default {
       return recursiveStat;
     },
     getSlotChildren:function(slot){
+
       if(!slot || !slot["children"] || slot["children"]["length"]===0)
         return this.showConfigErrorMessage();
 
