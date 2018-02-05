@@ -1,7 +1,8 @@
 <template>
-  <span>
+  <span class="form-inline">
     <label for="search">{{cSearchLabel}}</label>
     <input
+      class="form-control"
       type="text"
       name="search"
       v-on:keyup.13="goToFind()"

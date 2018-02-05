@@ -1,8 +1,8 @@
 <template>
   <div class="cv-paginate">
     <div class="col-xs-12 col-sm-6 pull-left">
-      <div class="cv-paginate-buttons" style="min-height: 25px;">
-        <button  type="button"  v-on:click="setPage(1)" v-if="hasLeft()">«</button>
+      <div class="cv-paginate-buttons form-inline" style="min-height: 25px;">
+        <button  type="button" class="btn btn-default" v-on:click="setPage(1)" v-if="hasLeft()">«</button>
         <button  v-for="posicion in carrousel" type="button" class="btn btn-default"  v-on:click="setPage(posicion)" :class="{'active': posicion===currentPage}">{{posicion}}</button>
 
         <button  type="button" class="btn btn-default"  v-on:click="setPage(totalPaginated)" v-if="hasRight()">»</button>
@@ -15,6 +15,7 @@
           {{!goTo?"Ir a":"Ir"}}
         </button>
         <input 
+          class="form-control"
           v-if="goTo" 
           type="number" 
           v-model.number="jumpedPage"
@@ -26,9 +27,9 @@
 
       <p>Estás en la página  {{currentPage}} de {{totalPaginated}}, viendo los registros {{(currentPage-1) * cvLimit + 1}} a {{(currentPage-1) * cvLimit + cvTotalPageElements}} de {{cTotalQueryElements}} </p>
     </div>
-    <div  class="col-xs-12 col-sm-6 pull-right text-right">
+    <div  class="col-xs-12 col-sm-6 pull-right text-right form-inline">
       Numero de Registros por Página :
-      <select  v-model="limitSelected" @change='changeLimitPerPage(limitSelected)'>
+      <select   class="form-control" v-model="limitSelected" @change='changeLimitPerPage(limitSelected)'>
         <option
             v-for="limitValue in limitValues" 
         >
