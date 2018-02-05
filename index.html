@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Crudvel-grid</title>
+</head>
+
+<body>
+  <div id="app">
+    <crudvel-grid></crudvel-grid>
+  </div>
+
+  <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+  <script src="./dist/crudvel-grid.min.js"></script>
+  <script type="text/javascript">
+  new Vue({
+    el: "#app",
+    components: {
+      'crudvel-grid': CrudvelGrid
+    }
+  });
+  </script>
+
+</body>
+
+</html>

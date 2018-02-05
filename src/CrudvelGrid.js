@@ -1,13 +1,13 @@
-import DinamicTag from './components/DinamicTag'
-import CvOrderIcons from './components/CvOrderIcons'
-import CvGrid from './components/CvGrid'
-import CvPaginate from './components/CvPaginate'
-import CvSimpleFilters from './components/CvSimpleFilters'
-import CvAdvancedFilters from './components/CvAdvancedFilters'
-import CvExpertFilters from './components/CvExpertFilters'
-import CvThs from './components/CvThs'
-import CvTds from './components/CvTds'
-import CvSpinner from './components/CvSpinner'
+import DinamicTag from './components/DinamicTag.vue'
+import CvOrderIcons from './components/CvOrderIcons.vue'
+import CvGrid from './components/CvGrid.vue'
+import CvPaginate from './components/CvPaginate.vue'
+import CvSimpleFilters from './components/CvSimpleFilters.vue'
+import CvAdvancedFilters from './components/CvAdvancedFilters.vue'
+import CvExpertFilters from './components/CvExpertFilters.vue'
+import CvThs from './components/CvThs.vue'
+import CvTds from './components/CvTds.vue'
+import CvSpinner from './components/CvSpinner.vue'
 
 const CrudvelGrid = {
   // The install method is all that needs to exist on the plugin object.
