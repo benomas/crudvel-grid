@@ -5,16 +5,17 @@
       v-if="cSimpleFilters"
     >
     </cv-simple-filters>
-    <cv-simple-filters 
+    <cv-advanced-filters 
       @go-to-find="prepareToFind"
       v-if="cAdvancedFilters"
     >
-    </cv-simple-filters>
-    <cv-simple-filters 
+    </cv-advanced-filters>
+    <cv-expert-filters 
       @go-to-find="prepareToFind"
       v-if="cExpertFilters"
     >
-    </cv-simple-filters>
+    </cv-expert-filters>
+    <hr v-if="cTotalPageElements && topPaginate">
     <cv-paginate
       v-if ='cTotalPageElements && topPaginate'
       :cvTotalQueryElements='elementsCount'
@@ -26,8 +27,10 @@
       @event-page="refreshPaginate"
     >
     </cv-paginate>
+    <hr v-if="cTotalPageElements && topPaginate">
     <slot name="cv-grid-data">
     </slot>
+    <hr v-if="cTotalPageElements && bottomPaginate">
     <cv-paginate
       v-if='cTotalPageElements && bottomPaginate'
       :cvTotalQueryElements='elementsCount'
@@ -39,6 +42,7 @@
       @event-page="refreshPaginate"
     >
     </cv-paginate>
+    <hr v-if="cTotalPageElements && bottomPaginate">
   </dinamic-tag>
 </template>
 <script>
@@ -183,8 +187,8 @@ export default {
 
       for(let i=0; i<this.cvHeadTrChildren.length; i++){
         let cvTh =  this.cvHeadTrChildren[i];
-        let attrs =  cvTh.data.attrs;
-        if(attrs && attrs["cv-key"]){
+        let attrs =  cvTh.data.attrs || null;
+        if( attrs && attrs["cv-key"]){
           if(this.hasClass(cvTh,"cv-selectable")!==false)
             this.params.paginate.selectQuery.push(attrs["cv-key"]);
           if(this.hasClass(cvTh,"cv-filterable")!==false)
