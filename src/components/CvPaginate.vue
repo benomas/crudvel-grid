@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-paginate">
+  <div class="cv-paginate row">
     <div class="col-xs-12 col-sm-6 pull-left">
       <div class="cv-paginate-buttons form-inline" style="min-height: 25px;">
         <button  type="button" class="btn btn-default" v-on:click="setPage(1)" v-if="hasLeft()">«</button>
@@ -136,26 +136,30 @@ export default {
 </script>
 <style lang="scss">
 
-.active{
-  background-color: #0273d4 !important;
-  color:white;
-}
 
 button{
   cursor:pointer;
   border: 1px outset ThreeDLightShadow;
   border-radius:5px;
+  &.active{
+    background-color: #7da8c3 !important;
+    color:white;
+    &:hover{
+      color:white;
+    };
+  }
+  &:hover{
+    color:white;
+  };
 }
 
 .cv-paginate{
-  border-top:1px solid #CCCCCC;
-  border-bottom:1px solid #CCCCCC;
-  padding-top:15px;
-  padding-bottom:15px;
-  margin-top:10px;
-  margin-bottom:10px;
+  padding-top:5px;
 }
 
+p{
+  margin:0;
+}
 </style>
 
 
