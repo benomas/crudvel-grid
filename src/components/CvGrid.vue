@@ -184,7 +184,7 @@ export default {
       for(let i=0; i<this.cvHeadTrChildren.length; i++){
         let cvTh =  this.cvHeadTrChildren[i];
         let attrs =  cvTh.data.attrs;
-        if(attrs["cv-key"]){
+        if(attrs && attrs["cv-key"]){
           if(this.hasClass(cvTh,"cv-selectable")!==false)
             this.params.paginate.selectQuery.push(attrs["cv-key"]);
           if(this.hasClass(cvTh,"cv-filterable")!==false)
