@@ -1,6 +1,6 @@
 {
   "name": "crudvel-grid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Grid for interact with laravel crudvel api",
   "main": "./dist/crudvel-grid.min.js",
   "scripts": {
