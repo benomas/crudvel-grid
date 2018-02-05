@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: 'crudvel-grid.min.js',
-    library: 'VueVersion',
+    library: 'CrudvelGrid',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

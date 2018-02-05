@@ -2,7 +2,7 @@
   "name": "crudvel-grid",
   "version": "1.0.4",
   "description": "Grid for interact with laravel crudvel api",
-  "main": "index.js",
+  "main": "./dist/crudvel-grid.min.js",
   "scripts": {
     "test": "karma start",
     "test:watch": "karma start --single-run=false",
